@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="667px" height="375px" viewBox="0 0 667 375" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>Final Copy 79</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFF7EC" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="667" height="375"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Final-Copy-79">
+            <rect id="Rectangle-52" fill="#FFFFFF" x="0" y="-1" width="667" height="375"></rect>
+            <g id="Group-2-Copy" transform="translate(0.000000, -3.000000)">
+                <g id="Group" transform="translate(0.000000, 3.000000)">
+                    <g id="Rectangle-52-Copy-2">
+                        <use fill="#FFFFFF" xlink:href="#path-2"></use>
+                        <use fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                    </g>
+                </g>
+                <path d="M435.757767,0 L703,0 L703,375 L313,375 L435.757767,0 Z" id="Rectangle-311-Copy-3" fill="#BE7F2E" opacity="0.0636077425"></path>
+            </g>
+        </g>
+    </g>
+</svg>

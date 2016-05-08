@@ -1,0 +1,674 @@
+/* Empty. Add your own CSS if you like */
+@media (max-width: 479px) {
+  .responsive-xs {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    .responsive-sm .col, .responsive-sm .col-10, .responsive-sm .col-20, .responsive-sm .col-25, .responsive-sm .col-33, .responsive-sm .col-34, .responsive-sm .col-50, .responsive-sm .col-66, .responsive-sm .col-67, .responsive-sm .col-75, .responsive-sm .col-80, .responsive-sm .col-90 {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      -moz-box-flex: 1;
+      -moz-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      margin-bottom: 15px;
+      margin-left: 0;
+      max-width: 100%;
+      width: 100%; } }
+.no-text-overflow {
+    -ms-text-overflow: clip !important;
+    -o-text-overflow: clip !important;
+    text-overflow: clip !important;
+}
+
+/* App background */
+@media screen and (max-height: 375px) {
+    .background-container {
+        background: url('../img/background_375x667.png') no-repeat center;
+    }
+    .background-container div.scroll {
+        background: url('../img/background_375x667.png') no-repeat center;
+    }
+}
+@media screen and (min-height: 376px) and (max-height: 563px) {
+    .background-container {
+        background: url('../img/background_563x1001.png') no-repeat center;
+    }
+    .background-container div.scroll {
+        background: url('../img/background_563x1001.png') no-repeat center;
+    }
+}
+@media screen and (min-height: 564px) and (max-height: 750px) {
+    .background-container {
+        background: url('../img/background_750x1334.png') no-repeat center;
+    }
+    .background-container div.scroll {
+        background: url('../img/background_750x1334.png') no-repeat center;
+    }
+}
+@media screen and (min-height: 751px) {
+    .background-container {
+        background: url('../img/background_750x1334.png') no-repeat center;
+        background-size: cover;
+    }
+    .background-container div.scroll {
+        background: url('../img/background_750x1334.png') no-repeat center;
+        background-size: cover;
+    }
+}
+
+/* Menu */
+/* Containers */
+.background-container {
+    background-color: #0D2B2D !important;
+    border: 0;
+    color: #FFF;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+    .background-container div.scroll {
+        background-color: #0D2B2D !important;
+        color: #FFF;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+.menu-container,
+.menu-container-wide,
+.menu-container-narrow,
+.menu-container-right-wide {
+    left:50%;
+    position: absolute;
+    text-align: center;
+    top:50%;
+}
+.menu-container {
+    /*border: 1px solid #fff;*/
+    height: 310px;
+    margin-left:-175px;
+    margin-top:-155px;
+    width: 350px;    
+}
+    .menu-container > h2 {
+        color: #FFF;
+    }
+.menu-container-wide {
+    /*border: 1px solid #fff;*/
+    height: 240px;
+    margin-left:-235px;
+    margin-top:-155px;
+    width: 470px;    
+}
+.menu-container-narrow {
+    height: 240px;
+    margin-left:-130px;
+    margin-top:-155px;
+    width: 260px;    
+}
+.menu-container-right-wide {
+    height: 320px;
+    margin-left:-120px;
+    margin-top:-160px;
+    width: 360px;    
+}
+.menu-container-bottom {
+    height: 60px;
+    left:50%;
+    margin-left: -100px;
+    margin-top:81px;
+    position: absolute;
+    text-align: center;
+    top:50%;
+    width: 200px;
+}
+.menu-container-left {
+    height: 60px;
+    left:50%;
+    margin-left:-235px;
+    margin-top:81px;
+    position: absolute;
+    text-align: center;
+    top:50%;
+    width: 65px;    
+}
+.menu-container-left-top {
+    height: 60px;
+    left: 50%;
+    margin-left: -235px;
+    margin-top: -102px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 65px;    
+}
+.menu-container-right {
+    height: 60px;
+    left:50%;
+    margin-left:135px;
+    margin-top:81px;
+    position: absolute;
+    text-align: center;
+    top:50%;
+    width: 65px;    
+}
+.menu-container-wide-half {
+    /*border: 1px solid #fff;*/
+    float: left;
+    width: 50%;
+}
+
+/* Header */
+.game-header,
+.game-content {
+    /*margin-top: 0;
+    position: absolute;
+    top: 0;*/
+    width: 100%;
+}
+.game-header {
+    height: 50px;
+}
+.game-content {
+    height: 90%;
+}
+.game-header-10 {
+    /*border: 1px solid white;*/
+    height: 100%;
+    float: left;
+    width: 10%;
+}
+.game-header-30 {
+    height: 100%;
+    float: left;
+    width: 30%;
+}
+.game-header-40 {
+    height: 100%;
+    float: left;
+    width: 40%;
+}
+.game-header-45,
+.game-content-45 {
+    /*border: 1px solid white;*/
+    height: 100%;
+    float: left;
+    width: 45%;
+}
+.game-content-50 {
+    /*border: 1px solid white;*/
+    height: 100%;
+    float: left;
+    width: 50%;
+}
+.game-content-55,
+.game-header-55 {
+    /*border: 1px solid white;*/
+    height: 100%;
+    float: left;
+    width: 55%;
+}
+.header-timer {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 24px;
+    padding: 13px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+.game-title {
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    padding: 13px 10px;
+    text-transform: uppercase;
+    width: 29%;
+}
+.game-title-cricket {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    padding: 13px 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.game-options {
+    float: left;
+    width: 71%;
+    /*height: 16px;
+    padding: 17px 0;*/
+}
+.game-option-item {
+    background-color: #999;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: bold;
+    float: left;
+    line-height: 14px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 3px;
+    text-transform: uppercase;
+}
+.game-button-container {
+    bottom: 0;
+    right: 5px;
+    position: absolute;
+}
+.game-button-container-cricket {
+    bottom: 5px;
+    right: 2%;
+    position: absolute;
+}
+
+/* Buttons and such */
+.menu-button,
+.menu-button-half,
+.menu-button-small,
+.game-button,
+.game-button-small,
+.option-button,
+.game-type-button,
+.rounds-button,
+.add-player-button,
+.player-input-button,
+.button-container,
+.button-container-wide,
+.header-container,
+.header-container-small,
+.header-container-none,
+.back-button,
+.player-box,
+.player-box-cricket,
+.full-size-container,
+.howtoplay-container {
+    border: 0;
+    border-radius: 3px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+.menu-button {
+    display: block;
+    margin: 5px auto;
+    padding: 16px 0;
+    width: 250px;
+}
+.menu-button-half {
+    display: block;
+    margin: 0;
+    float: left;
+    padding: 16px 0;
+    width: 120px;
+}
+.menu-button-small {
+    display: block;
+    margin: 5px auto;
+    padding: 16px 0;
+    width: 100px;
+}
+.game-button {
+    background-color: rgba(255, 255, 255, 0);
+    color: #FFF;
+    display: block;
+    margin: 0 8px;
+    float: left;
+    padding: 10px 0;
+    width: 130px;
+}
+.game-button-small {
+    display: block;
+    margin: 5px;
+    padding: 16px 0;
+    width: 100px;
+}
+.game-button-active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.option-button {
+    display: block;
+    font-size: 18px;
+    margin: 5px 0;
+    padding: 16px 0 16px 50px;
+    text-align: left;
+    width: 180px;
+}
+.game-type-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFF;
+    display: block;
+    float: left;
+    font-size: 18px;
+    line-height: 18px;
+    margin: 5px 15px 5px 0;
+    padding: 15px 0;
+    text-align: center;
+    width: 60px;
+}
+.game-type-button-active {
+    background-color: #ACACAC;
+}
+.game-type-button-cricket {
+    margin: 5px 15px 5px 0;
+    width: 100px;
+}
+.rounds-button {
+    margin-top: 5px;
+    width: 200px;
+}
+    .rounds-button > div.rounds-change {
+        float: left;
+        padding: 15px 0 17px;
+        width: 40px;
+    }
+    .rounds-button > div.rounds-label {
+        border-left: 1px solid #000;
+        border-right: 1px solid #000;
+        float: left;
+        font-size: 18px;
+        line-height: 24px;
+        margin: 16px 0;
+        width: 120px;
+    }
+.add-player-button {
+    display: block;
+    margin: 4px auto;
+    padding: 16px 0;
+    text-align: left;
+    width: 210px;
+}
+.player-input-button {
+    display: block;
+    margin: 5px 0 5px 10px;
+    padding: 0 0;
+    text-align: left;
+    width: 220px;
+}
+    .player-input-button input {
+        background: none;
+        border-right: 5px solid #000;
+        border-radius: 5px 0 0 5px;
+        float: left;
+        font-size: 18px;
+        font-weight: bold;
+        height: 56px !important;
+        line-height: 18px;
+        padding: 16px;
+        vertical-align: middle;
+        width: 170px;
+    }
+    .player-input-button input::-webkit-input-placeholder {
+        color: #777 !important;
+    }
+ 
+    .player-input-button input:-moz-placeholder { /* Firefox 18- */
+        color: #777 !important;
+    }
+ 
+    .player-input-button input::-moz-placeholder {  /* Firefox 19+ */
+        color: #777 !important;
+    }
+ 
+    .player-input-button input:-ms-input-placeholder {  
+        color: #777 !important;
+    }
+    .player-input-button > span {
+        color: #000;
+        display: inline-block;
+        float: left;
+        padding: 15px 0 17px 0;
+        text-align: center;
+        vertical-align: middle;
+        width: 50px;
+    }
+.button-container {
+    display: block;
+    margin: 5px auto;
+    padding: 0;
+    width: 250px;
+}
+.button-container-wide {
+    display: block;
+    margin: 0 auto 5px;
+    padding: 0;
+    width: 320px;
+}
+.header-container {
+    display: block;
+    margin: 5px auto;
+    padding: 12px;
+    width: 320px;
+}
+.header-container-small {
+    display: block;
+    margin: 5px auto;
+    padding: 8px;
+    width: 320px;
+}
+.header-container-none {
+    display: block;
+    margin: 5px auto;
+    padding: 2px;
+    width: 320px;
+}
+.back-button {
+    padding: 14px 0;
+    text-align: left;
+    vertical-align: middle;
+    width: 100px;
+}
+.player-box {
+    font-size: 13px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    padding: 12px;
+    width: 80%;
+}
+.player-box-active {
+    font-size: 18px;
+    width: 90%;
+}
+.player-box-cricket {
+    float: left;
+    padding: 5px 5px 0 5px;
+    width: 50%;
+}
+.player-box-cricket > .player-name {
+    color: #FFF;
+    width: 97%;
+}
+.player-box-cricket > .darts-to-close {
+    margin-bottom: 2px;
+    text-align: center;
+    width: 97%;
+}
+.player-box-cricket > .numbers-to-close {
+    color: #FFF;
+    text-align: center;
+}
+
+.cricket-numbers-closing, 
+.cricket-numbers-to-close {
+    float: left;
+    margin-right: 1%;
+    width: 13%;
+}
+.cricket-numbers-closing {
+    padding-bottom: 2px;
+    line-height: 14px;
+}
+.cricket-numbers-to-close {
+    background-color: #ACACAC;
+    font-size: 18px;
+    line-height: 20px;
+}
+.player-box-name-cricket,
+.player-box > .player-box-name {
+    overflow: hidden;
+    padding-right: 65px;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+.player-box-active-cricket > .player-box-name-cricket {
+    padding-right: 135px;
+}
+.player-box-darts-cricket {
+    margin-left: -135px;
+}
+.player-box-score-cricket,
+.player-box > .player-box-score {
+    margin-left: -65px;
+}
+.player-box-active > .player-box-name {
+    padding-right: 111px;
+}
+.player-box-active > .player-box-score {
+    margin-left: -111px;
+}
+
+.cricker-numbers {
+    padding-top: 20px;
+    padding-left: 15px;
+}
+.payer-box-cricket-numbers {
+    font-size: 13px;
+}
+.player-box-active .payer-box-cricket-numbers {
+    font-size: 16px;
+}
+.game-board-background {
+    background: url('../img/board.png') no-repeat center top;
+    background-size: 85%;
+}
+.howtoplay-container {
+    font-size: 13px;
+    height: 168px;
+    line-height: 15px;
+    padding: 5px 0;
+    text-transform: none;
+}
+.full-size-container {
+    width: 100%;
+}
+
+
+/* Icons */
+.icon-dart-white {
+    background: url('../img/dart-white.png') no-repeat center 3px;
+    background-size: 18px;
+    display: inline-block;
+    height: 24px;
+    width: 18px;
+}
+.icon-dart-grey {
+    background: url('../img/dart-grey.png') no-repeat center 3px;
+    background-size: 18px;
+    display: inline-block;
+    height: 24px;
+    width: 18px;
+}
+.dot-image {
+    height: 12px;
+    text-align: center;
+    width: 12px;
+}
+
+/* Button styles */
+.button-transparent-inverted {
+    background-color: rgba(255, 255, 255, 0);
+    color: #FFF;
+}
+.button-cyan {
+    background-color: #5BE3B6;
+}
+.button-green {
+    background-color: #5BE32D;
+}
+.button-yellow {
+    background-color: #E3E32D;
+}
+.button-red {
+    background-color: #FA4544;
+}
+.button-grey {
+    background-color: #ACACAC;
+    color: #FFF;
+}
+.button-grey-disabled {
+    background-color: rgba(172, 172, 172, 0.5);
+    color: #BBB;
+}
+.button-opacity-30 {
+    opacity: 0.3;
+}
+.button-opacity-50 {
+    opacity: 0.5;
+}
+.button-opacity-70 {
+    opacity: 0.7;
+}
+
+/* Layout fixes */
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.clear {
+    clear: both;
+}
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+
+/* Scroll override */
+.custom-scroll .ng-animate .scroll-bar {
+  visibility: visible !important;
+}
+
+.custom-scroll .scroll-bar-fade-out{
+  opacity:1 !important
+}
+.custom-scroll .scroll-bar {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  width: 18px;
+}
+.custom-scroll .scroll-bar-indicator {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+}
+.scroll-margin-right .scroll-bar {
+    margin-right: 20px;
+}
+
+.scroll-height-179 {
+    height: 179px;
+}
+.scroll-height-182 {
+    height: 182px;
+}
+.scroll-height-250 {
+    height: 250px;
+}
+.scroll-height-255 {
+    height: 255px;
+}

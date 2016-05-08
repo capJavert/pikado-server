@@ -1,0 +1,100 @@
+﻿
+@media screen and (min-height: 640px) {
+    
+    /* Menu */
+    /* Containers */
+    .menu-container {
+        /*border: 1px solid #fff;*/
+        height: 310px;
+        margin-left:-275px;
+        margin-top:-155px;
+        width: 550px;    
+    }
+    .menu-container-wide {
+        /*border: 1px solid #fff;*/
+        height: 480px;
+        margin-left:-355px;
+        margin-top:-275px;
+        width: 710px;    
+    }
+    .menu-container-narrow {
+        height: 480px;
+        margin-left:-200px;
+        margin-top:-275px;
+        width: 400px;    
+    }
+    .menu-container-bottom {
+        margin-left: -150px;
+        margin-top:201px;
+        width: 300px;
+    }
+    .menu-container-left-top {
+        margin-left: -355px;
+        margin-top: -221px;
+        width: 65px;    
+    }
+    .menu-container-left {
+        margin-left:-355px;
+        margin-top:201px;
+        width: 65px;    
+    }
+    .menu-container-right {
+        margin-left:225px;
+        margin-top:201px;
+        width: 65px;    
+    }
+
+
+    /* Buttons and such */
+    .menu-button {
+        width: 370px;
+    }
+    .option-button {
+        width: 290px;
+    }
+    .game-type-button {
+        width: 100px;
+    }
+    .game-type-button-cricket {
+        width: 160px;
+    }
+    .rounds-button {
+        width: 300px;
+    }
+        .rounds-button > div.rounds-change {
+            width: 60px;
+        }
+        .rounds-button > div.rounds-label {
+            width: 180px;
+        }
+        .player-input-button {
+            width: 340px;
+        }
+            .player-input-button input {
+                width: 280px;
+            }
+            .player-input-button > span {
+                width: 60px;
+            }
+    .button-container {
+        width: 370px;
+    }
+    .menu-button-half {
+        width: 170px;
+    }
+
+
+    /* Scroll override */
+    .scroll-height-179 {
+        height: 299px !important;
+    }
+    .scroll-height-182 {
+        height: 430px !important;
+    }
+    .scroll-height-250 {
+        height: 422px !important;
+    }
+    .scroll-height-255 {
+        height: 365px !important;
+    }
+}

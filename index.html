@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="format-detection" content="telephone=no"> <!--disable number auto links-->
+    <!--<meta http-equiv="Content-Security-Policy">-->
+    <title></title>
+
+    <!-- custom fonts -->
+     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+
+    <link href="css/font-awesome.min.css" rel="stylesheet" >
+    <link href="css/flexboxgrid.min.css" rel="stylesheet" >
+
+    <script type="text/javascript" src="js/socket/socket.io.js" /></script>
+    <script type="text/javascript" src="js/jquery.js" /></script>
+    <script type="text/javascript" src="js/handlebars.js" /></script>
+    <script type="text/javascript" src="js/main.js" /></script>
+</head>
+<body ng-app="pikanje" class="container-screen">
+  <script id="pikado-scoreboard" type="text/x-handlebars-template">
+    {{#if waiting}}
+      <div style="width: 90%;margin: 100px auto 0 auto;">
+        <h1>Waiting for game to start...</h1><br /><br />
+      </div>
+    {{else}}
+      {{#if endGame}}
+        <div style="width: 90%;margin: 100px auto 0 auto;">
+          <h1>Results</h1><br /><br />
+          {{#each players}}
+          <div style="width: 100%;margin: 0 0 10px 0;" class="ipt {{this.color}}">
+              <span style="float:left;">{{this.displayName}}</span>
+              <span style="float: right;">{{this.score}}</span>
+          </div>
+          {{/each}}
+        </div>
+      {{else}}
+      <ion-view hide-nav-bar="true">
+          <ion-content class="container-background" scroll="false">
+
+              <div class="color-container-header button-header">
+                  <div class="align-center">
+                      <div class="container-50 float-left">
+                          <span class="btn-color btn-new-transparent-gold align-left">{{getTitle}}</span>
+                      </div>
+                  </div>
+              </div>
+
+          <div class="game-content-container" ng-if="isX01">
+              <div class="float-left container-25">
+                  <div class="color-container-center align-center uppercase">
+                      <div class="round-and-darts">
+                        <div class="round-and-darts">
+                            {{#if game.rules.runAndGun}}
+                            <div class="btn-new-navy current-round">
+                                R -
+                            </div>
+                            {{else}}
+                            <div class="btn-new-navy current-round">
+                                R {{ currentRound }}/{{ game.rules.rounds }}
+                            </div>
+                            {{/if}}
+                        </div>
+                        <div class="current-darts">
+                            <div class="float-left available-darts align-center btn-new-transparent-navy">
+                                <span ng-if="isOnline" class="average-statistic">{{#if avgStatisticName }}{{currentPlayer.avgStatisticValue}}{{/if}}</span>
+                                {{#compare currentPlayer.dartsRemaining 1 operator=">="}}<span ng-show="!isPlayOff"><img src="img/dart.svg" /></span>{{/compare}}{{#if dart3}}<span>{{ dart3 }}</span>{{/if}}
+                                {{#compare currentPlayer.dartsRemaining 2 operator=">="}}<span ng-show="!isPlayOff"><img src="img/dart.svg" ng-show="currentPlayer.dartsRemaining >= 2" /></span>{{/compare}}<span>{{#if dart2}}{{ dart2 }}</span>{{/if}}
+                                {{#compare currentPlayer.dartsRemaining 3 operator="=="}}<span><img src="img/dart.svg" ng-show="currentPlayer.dartsRemaining === 3" /></span>{{/compare}}<span>{{#if dart1}}{{ dart1 }}</span>{{/if}}
+                            </div>
+                        </div>
+                      </div>
+
+                  </div>
+              </div>
+              <div class="float-left container-55">
+                  <div class="color-container-center align-center uppercase active-score">
+                          {{#if game.rules.runAndGun}}<span class="active-score-timer btn-new-transparent-gold" ng-show="isRunAndGun">{{ timer }}</span>{{/if}}
+                          <span class="btn-new-transparent-navy active-score-current-big">{{ currentPlayer.score }}</span>
+                          {{#throw forceWait awaitApproach buttonDisabled}}<span class="active-score-message btn-new-transparent-gold uppercase" ng-if="!forceWait && !awaitApproach && !buttonDisabled" translate="message.gameThrow">THROW</span>{{/throw}}
+                          {{#pull forceWait awaitApproach buttonDisabled}}<span class="active-score-message btn-new-transparent-gold uppercase" ng-if="!forceWait && awaitApproach && buttonDisabled" translate="message.gameCollect">PULL</span>{{/pull}}
+                          {{#wait forceWait awaitApproach buttonDisabled}}<span class="active-score-message btn-new-transparent-gold uppercase" ng-if="forceWait || (awaitApproach && !buttonDisabled)" translate="message.gameWait">WAIT</span>{{/wait}}
+                  </div>
+              </div>
+              <div class="float-left container-20">
+                  <div class="color-container-center align-center uppercase previous-score">
+                      <span class="btn-new-transparent-navy previous-score-current">{{ currentRoundScore }}</span>
+                      <span class="btn-new-transparent-navy previous-score-round">
+                          {{#index_of currentPlayer.roundScores currentPlayer.roundScores.length  1}}{{/index_of}}
+                          <span class="btn-new-transparent-gold">
+                              R{{ math currentPlayer.roundScores.length  "-" 1 }}
+                          </span>
+                      </span>
+
+                      {{#compare currentPlayer.roundScores.length 2 operator=">="}}<span class="btn-new-transparent-navy previous-score-round">
+                          {{#index_of currentPlayer.roundScores currentPlayer.roundScores.length  2}}{{/index_of}}
+                          <span class="btn-new-transparent-gold">
+                              R{{ math currentPlayer.roundScores.length "-" 2 }}
+                          </span>
+                      </span>{{/compare}}
+                      {{#compare currentPlayer.roundScores.length 3 operator=">="}}<span class="btn-new-transparent-navy previous-score-round">
+                          {{#index_of currentPlayer.roundScores currentPlayer.roundScores.length  3}}{{/index_of}}
+                          <span class="btn-new-transparent-gold">
+                              R{{ math currentPlayer.roundScores.length "-" 3 }}
+                          </span>
+                      </span>{{/compare}}
+                  </div>
+              </div>
+          </div>
+          <div class="game-footer">
+              <div class="color-container-footer game-players-container align-center">
+                  <!-- PLAYER 1 BOX -->
+                  {{#compare players.length 1 operator=">="}}
+                  <div class="float-left {{#container_width players.length}}{{/container_width}}">
+                      {{#if isHalf}}
+                        <span ng-if="isHalf"
+                            class="split-scoreboard player-names {{#compare currentPlayer.id players.0.id operator="==="}}{{#index_of playerColors 0}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.0.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}">
+                            <i class="fa"></i> {{ players.0.displayName }} ({{ players.0.avgStatistic }})
+
+                            <span class="{{#index_of playerColors 0}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                                {{ players.0.score }}
+                            </span>
+                        </span>
+                      {{else}}
+                        <span class="player-names {{#compare currentPlayer.id players.0.id operator="==="}}{{#index_of playerColors 0}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.0.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}" ng-if="!isHalf">
+                            <i class="fa"></i> {{ players.0.displayName }} ({{ players.0.avgStatistic }})
+                        </span>
+
+                        <span class="{{#index_of playerColors 0}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                            {{ players.0.score }}
+                        </span>
+                      {{/if}}
+                  </div>
+                  {{/compare}}
+                  <!-- PLAYER 2 BOX -->
+                  {{#compare players.length 2 operator=">="}}
+                  <div class="float-left {{#container_width players.length}}{{/container_width}}">
+                      {{#if isHalf}}
+                        <span ng-if="isHalf"
+                            class="split-scoreboard player-names {{#compare currentPlayer.id players.1.id operator="==="}}{{#index_of playerColors 1}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.1.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}">
+                            <i class="fa"></i> {{ players.1.displayName }} ({{ players.1.avgStatistic }})
+
+                            <span class="{{#index_of playerColors 1}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                                {{ players.1.score }}
+                            </span>
+                        </span>
+                      {{else}}
+                        <span class="player-names {{#compare currentPlayer.id players.1.id operator="==="}}{{#index_of playerColors 1}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.1.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}" ng-if="!isHalf">
+                            <i class="fa"></i> {{ players.1.displayName }} ({{ players.1.avgStatistic }})
+                        </span>
+
+                        <span class="{{#index_of playerColors 1}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                            {{ players.1.score }}
+                        </span>
+                      {{/if}}
+                  </div>
+                  {{/compare}}
+                  <!-- PLAYER 3 BOX -->
+                  {{#compare players.length 3 operator=">="}}
+                  <div class="float-left {{#container_width players.length}}{{/container_width}}">
+                      {{#if isHalf}}
+                        <span ng-if="isHalf"
+                            class="split-scoreboard player-names {{#compare currentPlayer.id players.2.id operator="==="}}{{#index_of playerColors 2}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.2.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}">
+                            <i class="fa"></i> {{ players.2.displayName }} ({{ players.2.avgStatistic }})
+
+                            <span class="{{#index_of playerColors 2}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                                {{ players.2.score }}
+                            </span>
+                        </span>
+                      {{else}}
+                        <span class="player-names {{#compare currentPlayer.id players.2.id operator="==="}}{{#index_of playerColors 2}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.2.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}" ng-if="!isHalf">
+                            <i class="fa"></i> {{ players.2.displayName }} ({{ players.2.avgStatistic }})
+                        </span>
+
+                        <span class="{{#index_of playerColors 2}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                            {{ players.2.score }}
+                        </span>
+                      {{/if}}
+                  </div>
+                  {{/compare}}
+                  <!-- PLAYER 4 BOX -->
+                  {{#compare players.length 4 operator=">="}}
+                  <div class="float-left {{#container_width players.length}}{{/container_width}}">
+                      {{#if isHalf}}
+                        <span ng-if="isHalf"
+                            class="split-scoreboard player-names {{#compare currentPlayer.id players.3.id operator="==="}}{{#index_of playerColors 3}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.3.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}">
+                            <i class="fa"></i> {{ players.3.displayName }} ({{ players.3.avgStatistic }})
+
+                            <span class="{{#index_of playerColors 3}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                                {{ players.3.score }}
+                            </span>
+                        </span>
+                      {{else}}
+                        <span class="player-names {{#compare currentPlayer.id players.3.id operator="==="}}{{#index_of playerColors 3}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.3.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}" ng-if="!isHalf">
+                            <i class="fa"></i> {{ players.3.displayName }} ({{ players.3.avgStatistic }})
+                        </span>
+
+                        <span class="{{#index_of playerColors 3}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                            {{ players.3.score }}
+                        </span>
+                      {{/if}}
+                  </div>
+                  {{/compare}}
+                  <!-- PLAYER 5 BOX -->
+                  {{#compare players.length 5 operator=">="}}
+                  <div class="float-left {{#container_width players.length}}{{/container_width}}">
+                      {{#if isHalf}}
+                        <span ng-if="isHalf"
+                            class="split-scoreboard player-names {{#compare currentPlayer.id players.4.id operator="==="}}{{#index_of playerColors 4}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.4.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}">
+                            <i class="fa"></i> {{ players.4.displayName }} ({{ players.4.avgStatistic }})
+
+                            <span class="{{#index_of playerColors 4}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                                {{ players.4.score }}
+                            </span>
+                        </span>
+                      {{else}}
+                        <span class="player-names {{#compare currentPlayer.id players.4.id operator="==="}}{{#index_of playerColors 4}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.4.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}" ng-if="!isHalf">
+                            <i class="fa"></i> {{ players.4.displayName }} ({{ players.4.avgStatistic }})
+                        </span>
+
+                        <span class="{{#index_of playerColors 4}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                            {{ players.4.score }}
+                        </span>
+                      {{/if}}
+                  </div>
+                  {{/compare}}
+                  <!-- PLAYER 6 BOX -->
+                  {{#compare players.length 6 operator=">="}}
+                  <div class="float-left {{#container_width players.length}}{{/container_width}}">
+                      {{#if isHalf}}
+                        <span ng-if="isHalf"
+                            class="split-scoreboard player-names {{#compare currentPlayer.id players.5.id operator="==="}}{{#index_of playerColors 5}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.5.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}">
+                            <i class="fa"></i> {{ players.5.displayName }} ({{ players.5.avgStatistic }})
+
+                            <span class="{{#index_of playerColors 5}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                                {{ players.5.score }}
+                            </span>
+                        </span>
+                      {{else}}
+                        <span class="player-names {{#compare currentPlayer.id players.5.id operator="==="}}{{#index_of playerColors 5}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.5.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}" ng-if="!isHalf">
+                            <i class="fa"></i> {{ players.5.displayName }} ({{ players.5.avgStatistic }})
+                        </span>
+
+                        <span class="{{#index_of playerColors 5}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                            {{ players.5.score }}
+                        </span>
+                      {{/if}}
+                  </div>
+                  {{/compare}}
+                  <!-- PLAYER 7 BOX -->
+                  {{#compare players.length 7 operator=">="}}
+                  <div class="float-left {{#container_width players.length}}{{/container_width}}">
+                      {{#if isHalf}}
+                        <span ng-if="isHalf"
+                            class="split-scoreboard player-names {{#compare currentPlayer.id players.6.id operator="==="}}{{#index_of playerColors 6}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.6.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}">
+                            <i class="fa"></i> {{ players.6.displayName }} ({{ players.6.avgStatistic }})
+
+                            <span class="{{#index_of playerColors 6}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                                {{ players.6.score }}
+                            </span>
+                        </span>
+                      {{else}}
+                        <span class="player-names {{#compare currentPlayer.id players.6.id operator="==="}}{{#index_of playerColors 6}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.6.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}" ng-if="!isHalf">
+                            <i class="fa"></i> {{ players.6.displayName }} ({{ players.6.avgStatistic }})
+                        </span>
+
+                        <span class="{{#index_of playerColors 6}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                            {{ players.6.score }}
+                        </span>
+                      {{/if}}
+                  </div>
+                  {{/compare}}
+                  <!-- PLAYER 8 BOX -->
+                  {{#compare players.length 8 operator=">="}}
+                  <div class="float-left {{#container_width players.length}}{{/container_width}}">
+                      {{#if isHalf}}
+                        <span ng-if="isHalf"
+                            class="split-scoreboard player-names {{#compare currentPlayer.id players.7.id operator="==="}}{{#index_of playerColors 7}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.7.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}">
+                            <i class="fa"></i> {{ players.7.displayName }} ({{ players.7.avgStatistic }})
+
+                            <span class="{{#index_of playerColors 7}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                                {{ players.7.score }}
+                            </span>
+                        </span>
+                      {{else}}
+                        <span class="player-names {{#compare currentPlayer.id players.7.id operator="==="}}{{#index_of playerColors 7}}{{/index_of}}{{/compare}} {{#compare currentPlayer.id players.7.id operator="!=="}}{{#index_of playerColors 8}}{{/index_of}}{{/compare}}" ng-if="!isHalf">
+                            <i class="fa"></i> {{ players.7.displayName }} ({{ players.7.avgStatistic }})
+                        </span>
+
+                        <span class="{{#index_of playerColors 7}}{{/index_of}} split-scoreboard" ng-if="isHalf">
+                            {{ players.7.score }}
+                        </span>
+                      {{/if}}
+                  </div>
+                  {{/compare}}
+              </div>
+          </div>
+
+      </ion-content>
+      </ion-view>
+    {{/if}}
+  {{/if}}
+  </script>
+
+  <div style="width: 100%;" id="content">
+
+  </div>
+</body>
+</html>
